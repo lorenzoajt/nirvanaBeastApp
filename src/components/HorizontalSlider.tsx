@@ -1,14 +1,15 @@
 import React from 'react'
-import { Movie } from '../interfaces/movieInterface'
 import { FlatList, Text, View } from 'react-native'
 import { MoviePoster } from './MoviePoster'
+import { Lesson } from '../interfaces/lessonInterface'
+import { LessonBanner } from './LessonBanner'
 
 interface Props {
     title?: string, 
-    movies: Movie[]
+    lessons: Lesson[]
 }
 
-export const HorizontalSlider = ({title, movies}: Props) => {
+export const HorizontalSlider = ({title, lessons}: Props) => {
   return (
     <View style={{ height: (title)? 260 : 220 }}>
         {
@@ -16,9 +17,9 @@ export const HorizontalSlider = ({title, movies}: Props) => {
         }
         
         <FlatList
-            data={movies}
-            renderItem={({ item }: any) => <MoviePoster movie={item} height={200} width={140}/>}
-            keyExtractor={ (item)=> item.id.toString()}
+            data={lessons}
+            renderItem={({ item }: any) => <LessonBanner lesson={item} height={200} width={140} titleSize={12} subTitleSize={10}/>}
+            keyExtractor={ (item)=> item.id.toString()}            
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             

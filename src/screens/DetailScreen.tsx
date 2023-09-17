@@ -1,23 +1,21 @@
 import React from 'react'
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { Movie } from '../interfaces/movieInterface'
 import { StackScreenProps } from '@react-navigation/stack'
-import { Navigation, RootStackParams } from '../navigation/Navigation'
+import { RootStackParams } from '../navigation/Navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { useMovieDetails } from '../hooks/useMovieDetails'
-import { MovieDetails } from '../components/MovieDetails';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useLessonDetails } from '../hooks/useLessonDetails';
+import { LessonDetails } from '../components/LessonDetails';
 
 const screenHeight = Dimensions.get('screen').height
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
 
 export const DetailScreen = ( { route, navigation }: Props ) => {
-  const movie = route.params
-  const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-
-  const {cast, isLoading, movieFull} = useMovieDetails(movie.id)
+  const lesson = route.params
+  const uri = lesson.image_link
   
-
+  const {instructors, isLoading, lessonFull} = useLessonDetails(lesson.id)
+  
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
@@ -27,15 +25,15 @@ export const DetailScreen = ( { route, navigation }: Props ) => {
 
       </View>
       <View style={styles.marginContainer}>
-        <Text style={styles.subtitle}>{movie.original_title}</Text>
-        <Text style={styles.title}>{movie.title}</Text> 
+        <Text style={styles.subtitle}>{lesson.instructor}</Text>
+        <Text style={styles.title}>{lesson.title}</Text> 
       </View>
 
       
       {
         isLoading 
           ? <ActivityIndicator size={ 30 } color='gray' style={{marginTop: 20}}/>  
-          : <MovieDetails movieFull={movieFull!} cast={cast}/>          
+          : <LessonDetails lessonFull={lessonFull!} instructor={instructors}/>          
       }
       <View style={styles.backButton}>
         <TouchableOpacity

@@ -1,20 +1,17 @@
-import { useNavigation } from '@react-navigation/native'
 import React, { useEffect } from 'react'
-import { ActivityIndicator, Button, Dimensions, FlatList, ScrollView, Text, View } from 'react-native'
-import movieDB from '../api/movieDB'
+import { ActivityIndicator, Button, Dimensions, ScrollView, View } from 'react-native'
 
 import Carousel from 'react-native-snap-carousel';
-
-import { useMovies } from '../hooks/useMovies'
-import { MoviePoster } from '../components/MoviePoster';
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HorizontalSlider } from '../components/HorizontalSlider';
+import { useLessons } from '../hooks/useLessons';
+import { LessonBanner } from '../components/LessonBanner';
 
 
 const { width: windowWidth } =Dimensions.get('window')
 
 export const HomeScreen = () => {
-  const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies()  
+  const {isLoading, newLessons} = useLessons()
   const { top }= useSafeAreaInsets()
 
   if(isLoading){
@@ -29,7 +26,6 @@ export const HomeScreen = () => {
     )
   }
   
-   
   return (
 
     <ScrollView>
@@ -39,8 +35,8 @@ export const HomeScreen = () => {
             style= {{height: 440}}
           >
             <Carousel
-              data={ nowPlaying}
-              renderItem={({ item }: any) => <MoviePoster movie={item}/>}
+              data={ newLessons}
+              renderItem={({ item }: any) => <LessonBanner lesson={item}/>}
               sliderWidth={ windowWidth }
               itemWidth={ 300 }
               inactiveSlideOpacity={0.9}
@@ -48,9 +44,9 @@ export const HomeScreen = () => {
           </View>
 
           {/* Paliculas populares */}
-          <HorizontalSlider movies={popular} title='Popular'/>
-          <HorizontalSlider movies={topRated} title='Top Rated'/>
-          <HorizontalSlider movies={upcoming} title='Upcoming'/>
+          <HorizontalSlider lessons={newLessons} title='Para ti'/>
+          <HorizontalSlider lessons={newLessons} title='Mejor valoradas'/>
+          <HorizontalSlider lessons={newLessons} title='Próximamente'/>
           
       </View>
     </ScrollView>
