@@ -11,7 +11,7 @@ interface Props {
 
 export const LessonDetails = ({lessonFull, instructor}: Props) => {
   return (
-    <>
+    <>        
         {/* Detalles */}
         <View style={{ marginHorizontal: 20 }}>
             <View style={{flexDirection: 'row'}}>                     

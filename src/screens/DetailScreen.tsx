@@ -1,18 +1,17 @@
 import React from 'react'
-import { Dimensions, Image, ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack'
 import { RootStackParams } from '../navigation/Navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useLessonDetails } from '../hooks/useLessonDetails';
 import { LessonDetails } from '../components/LessonDetails';
-
+import { WebView } from 'react-native-webview';
 const screenHeight = Dimensions.get('screen').height
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
 
 export const DetailScreen = ( { route, navigation }: Props ) => {
   const lesson = route.params
-  const uri = lesson.image_link
   
   const {instructors, isLoading, lessonFull} = useLessonDetails(lesson.id)
   
@@ -20,7 +19,13 @@ export const DetailScreen = ( { route, navigation }: Props ) => {
     <ScrollView>
       <View style={styles.imageContainer}>
         <View style={styles.imageBorder}>
-          <Image source={{uri}} style={styles.posterImage} />
+          <WebView              
+              style={styles.posterImage}
+              javaScriptEnabled={true}
+              domStorageEnabled={true}
+              source={{uri: `https://www.youtube.com/embed/${lessonFull?.video_link}`}}
+          />
+
         </View>
 
       </View>
