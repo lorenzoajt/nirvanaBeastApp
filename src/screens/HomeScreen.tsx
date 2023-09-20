@@ -6,12 +6,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HorizontalSlider } from '../components/HorizontalSlider';
 import { useLessons } from '../hooks/useLessons';
 import { LessonBanner } from '../components/LessonBanner';
+import { InstructorSlider } from '../components/InstructorSlider';
 
 
 const { width: windowWidth } =Dimensions.get('window')
 
 export const HomeScreen = () => {
-  const {isLoading, newLessons} = useLessons()
+  const {isLoading, newLessons, instructors} = useLessons()
   const { top }= useSafeAreaInsets()
 
   if(isLoading){
@@ -43,9 +44,9 @@ export const HomeScreen = () => {
             />
           </View>
 
-          {/* Paliculas populares */}
-          <HorizontalSlider lessons={newLessons} title='Para ti'/>
-          <HorizontalSlider lessons={newLessons} title='Mejor valoradas'/>
+          {/* Secciones */}
+          <InstructorSlider instructors={instructors} title='Instructores'/>
+          <HorizontalSlider lessons={newLessons} title='Estilo'/>
           <HorizontalSlider lessons={newLessons} title='Próximamente'/>
           
       </View>

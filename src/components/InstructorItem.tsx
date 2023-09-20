@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Instructor } from '../interfaces/instructorsInterface';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
     instructor: Instructor
@@ -8,23 +10,28 @@ interface Props {
 
 export const InstructorItem = ({ instructor }: Props) => {
     const uri = instructor.picture
+    const navigation = useNavigation()
   return (
-    <View style={styles.container}>
-        {
-            instructor.picture && (
-                <Image
-                    source={{uri}}
-                    style={{ width: 50, height: 50, borderRadius: 10}}
-                />
-            )
-        }
-        
-        <View style={styles.actorInfo}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{instructor.name}</Text>
-            <Text style={{fontSize: 18, opacity: 0.7}}>{instructor.discipline}</Text>
-        </View>
+    <TouchableOpacity
+        onPress={() => navigation.navigate('InstructorScreen', instructor)}
+    >
+        <View style={styles.container}>
+            {
+                instructor.picture && (
+                    <Image
+                        source={{uri}}
+                        style={{ width: 50, height: 50, borderRadius: 10}}
+                    />
+                )
+            }
+            
+            <View style={styles.actorInfo}>
+                <Text style={{fontSize: 18, fontWeight: 'bold'}}>{instructor.name}</Text>
+                <Text style={{fontSize: 18, opacity: 0.7}}>{instructor.discipline}</Text>
+            </View>
 
-    </View>
+        </View>
+    </TouchableOpacity>
     
   )
 }
