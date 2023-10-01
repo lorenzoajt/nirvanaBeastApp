@@ -5,6 +5,8 @@ import { DetailScreen } from '../screens/DetailScreen';
 import { Lesson } from '../interfaces/lessonInterface';
 import { Instructor } from '../interfaces/instructorsInterface';
 import { InstructorDetailScreen } from '../screens/InstructorDetailScreen';
+import { LoginScreen } from '../screens/AccountsScreens/LoginScreen';
+import { RegisterScreen } from '../screens/AccountsScreens/RegisterScreen';
 
 export type RootStackParams = {
   HomeScreen: undefined
@@ -15,6 +17,11 @@ export type RootStackParams = {
 const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
+  // const { status } = useContext(AuthContext)
+  const status = 'loading' // TODO: removbe this anf use the context
+
+  // if ( status === 'checking' ) return <LoadingScreen />
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -24,9 +31,22 @@ export const Navigation = () => {
         // }
       }}
     >
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />     
-      <Stack.Screen name="InstructorScreen" component={InstructorDetailScreen} />      
+      {
+        (status !== 'authenticated')
+        ? (
+          <>
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          </>
+        )
+        : (
+          <>          
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} />     
+            <Stack.Screen name="InstructorScreen" component={InstructorDetailScreen} />      
+          </>
+        )
+      }
     </Stack.Navigator>
   );
 }
