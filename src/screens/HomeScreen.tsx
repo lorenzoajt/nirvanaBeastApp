@@ -46,7 +46,7 @@ export const HomeScreen = () => {
 
           {/* Secciones */}
           <InstructorSlider instructors={instructors} title='Instructores'/>
-          <HorizontalSlider lessons={newLessons} title='Estilo'/>
+          <HorizontalSlider lessons={newLessons} title='Para ti'/>
           <HorizontalSlider lessons={newLessons} title='Próximamente'/>
           
       </View>
