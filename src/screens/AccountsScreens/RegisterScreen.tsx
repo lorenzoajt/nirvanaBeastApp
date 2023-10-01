@@ -4,13 +4,13 @@ import { loginStyles } from '../../theme/loginTheme';
 import { WhiteLogo } from '../../components/AccountsComponents/WhiteLogo';
 import { useForm } from '../../hooks/useForm'
 import { StackScreenProps } from '@react-navigation/stack'
-// import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext';
 
 interface Props extends StackScreenProps<any, any>{}
 
 export const RegisterScreen = ({navigation}: Props) => {
 
-//   const { signUp, errorMessage, removeError } = useContext(AuthContext)
+  const { signUp, errorMessage, removeError } = useContext(AuthContext)
 
   const { email, password, name, onChange } = useForm({
     name: '',
@@ -33,13 +33,13 @@ export const RegisterScreen = ({navigation}: Props) => {
   
 
   const onRegister = () => {
-    console.log(email, password, name)
+    
     // dispatch action
-    // signUp({
-    //   correo: email, 
-    //   password,
-    //   nombre: name
-    // })
+    signUp({
+      email, 
+      password,
+      name
+    })
 
 
     Keyboard.dismiss()

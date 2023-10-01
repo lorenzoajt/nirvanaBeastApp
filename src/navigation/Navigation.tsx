@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { DetailScreen } from '../screens/DetailScreen';
@@ -7,6 +7,7 @@ import { Instructor } from '../interfaces/instructorsInterface';
 import { InstructorDetailScreen } from '../screens/InstructorDetailScreen';
 import { LoginScreen } from '../screens/AccountsScreens/LoginScreen';
 import { RegisterScreen } from '../screens/AccountsScreens/RegisterScreen';
+import { AuthContext } from '../context/AuthContext';
 
 export type RootStackParams = {
   HomeScreen: undefined
@@ -17,8 +18,7 @@ export type RootStackParams = {
 const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
-  // const { status } = useContext(AuthContext)
-  const status = 'loading' // TODO: removbe this anf use the context
+  const { status } = useContext(AuthContext)
 
   // if ( status === 'checking' ) return <LoadingScreen />
 

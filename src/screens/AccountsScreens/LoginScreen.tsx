@@ -5,16 +5,16 @@ import { WhiteLogo } from '../../components/AccountsComponents/WhiteLogo';
 import { loginStyles } from '../../theme/loginTheme';
 import { useForm } from '../../hooks/useForm';
 import { StackScreenProps } from '@react-navigation/stack';
-// import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 interface Props extends StackScreenProps<any, any>{}
 
 export const LoginScreen = ({ navigation }: Props) => {
 
-//   const { signIn, errorMessage, removeError } = useContext(AuthContext)
+  const { signIn, errorMessage, removeError } = useContext(AuthContext)
 
-  const { email, password, onChange } = useForm({
-    email: '',
+  const { username_or_email, password, onChange } = useForm({
+    username_or_email: '',
     password: ''
   })
 
@@ -32,9 +32,8 @@ export const LoginScreen = ({ navigation }: Props) => {
 //   }, [ errorMessage ])
   
 
-  const onLogin = () => {
-    console.log(email, password)
-    // signIn({ correo: email, password })
+  const onLogin = () => {    
+    signIn({ username_or_email, password })
     Keyboard.dismiss()
   }
   return (
@@ -60,8 +59,8 @@ export const LoginScreen = ({ navigation }: Props) => {
               (Platform.OS == 'ios') && loginStyles.inputFieldIOS
             ]}
             selectionColor="white"
-            onChangeText={(value)=> onChange(value, 'email')}
-            value={ email }
+            onChangeText={(value)=> onChange(value, 'username_or_email')}
+            value={ username_or_email }
             onSubmitEditing={ onLogin }
             autoCapitalize='none'
             autoCorrect={false}
