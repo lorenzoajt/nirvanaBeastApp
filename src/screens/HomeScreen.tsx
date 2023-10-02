@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ActivityIndicator, Button, Dimensions, ScrollView, View } from 'react-native'
 
 import Carousel from 'react-native-snap-carousel';
@@ -7,6 +7,7 @@ import { HorizontalSlider } from '../components/HorizontalSlider';
 import { useLessons } from '../hooks/useLessons';
 import { LessonBanner } from '../components/LessonBanner';
 import { InstructorSlider } from '../components/InstructorSlider';
+import { AuthContext } from '../context/AuthContext';
 
 
 const { width: windowWidth } =Dimensions.get('window')
@@ -14,6 +15,7 @@ const { width: windowWidth } =Dimensions.get('window')
 export const HomeScreen = () => {
   const {isLoading, newLessons, instructors} = useLessons()
   const { top }= useSafeAreaInsets()
+  const { logOut} = useContext(AuthContext)
 
   if(isLoading){
     return(
@@ -30,6 +32,11 @@ export const HomeScreen = () => {
   return (
 
     <ScrollView>
+      <Button
+          title='Logout'
+          color="#5856D6"
+          onPress={ logOut }
+        />
       <View style={{ marginTop: top + 20 }}>             
           {/* carrusel principal */}
           <View

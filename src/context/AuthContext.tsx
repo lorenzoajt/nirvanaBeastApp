@@ -58,30 +58,29 @@ export const AuthProvider = ({children}: any) => {
     }
     
   
-    const signUp = async ({name, email, password }: RegisterData) => {
-        console.log("sign up to dispatch", name, email, password)
-    //   try {
-    //     const res = await nirvanaBeastAPI.post<LoginResponse>('/usuarios', {
-    //       name, 
-    //       email, 
-    //       password
-    //     })
+    const signUp = async ({username, email, password }: RegisterData) => {    
+      console.log(username)    
+      try {
+        const res = await nirvanaBeastAPI.post<LoginResponse>('/api/auth/register', {
+          username, 
+          email, 
+          password
+        })
         
-    //     dispatch({
-    //       type: 'signUp',
-    //       payload:{
-    //         token: res.data.token,
-    //         user: res.data.user,          
-    //       }
-    //     })
-    //     await AsyncStorage.setItem('token', res.data.token)
-    //   } catch (error: any) {
-    //     console.log(error.response.data.errors)
-    //     dispatch({
-    //       type: 'addError',
-    //       payload: error.response.data.errors[0].msg || "Revise la infromación"
-    //     })
-    //   }
+        dispatch({
+          type: 'signUp',
+          payload:{
+            token: res.data.token,
+            user: res.data.user,          
+          }
+        })
+        await AsyncStorage.setItem('token', res.data.token)
+      } catch (error: any) {
+        dispatch({
+          type: 'addError',
+          payload: error.response.data.msg || "Revise la infromación"
+        })
+      }
     }
   
     const signIn = async ( { username_or_email, password } : LoginData) => {   
@@ -100,7 +99,6 @@ export const AuthProvider = ({children}: any) => {
         // save token
         await AsyncStorage.setItem('token', data.token)
       } catch (error: any) {
-        
         dispatch({
           type: 'addError',
           payload: error.response.data.msg || "Información incorrecta"
@@ -109,9 +107,9 @@ export const AuthProvider = ({children}: any) => {
     }
     // clean async storage
     const logOut = async () => {
-        console.log("logging out")
-    //   await AsyncStorage.removeItem('token')
-    //   dispatch({ type: 'logout' })    
+      console.log("logging out")
+      await AsyncStorage.removeItem('token')
+      dispatch({ type: 'logout' })    
   
     }
   

@@ -18,18 +18,18 @@ export const LoginScreen = ({ navigation }: Props) => {
     password: ''
   })
 
-//   useEffect(() => {
-//     if ( errorMessage.length === 0) return
-//     Alert.alert('Login incorrecto', 
-//       errorMessage, 
-//       [
-//         {
-//           text: 'OK',
-//           onPress: removeError
-//         }
-//       ]
-//     )    
-//   }, [ errorMessage ])
+  useEffect(() => {
+    if ( errorMessage.length === 0) return
+    Alert.alert('Login incorrecto', 
+      errorMessage, 
+      [
+        {
+          text: 'OK',
+          onPress: removeError
+        }
+      ]
+    )    
+  }, [ errorMessage ])
   
 
   const onLogin = () => {    
@@ -48,9 +48,9 @@ export const LoginScreen = ({ navigation }: Props) => {
 
           <WhiteLogo/>
           <Text style={loginStyles.title}>Login</Text>
-          <Text style={loginStyles.label}>Email</Text>
+          <Text style={loginStyles.label}>Usuario/ Email</Text>
           <TextInput
-            placeholder='Ingrese su email:'
+            placeholder='Ingrese su email o usuario:'
             placeholderTextColor='rgba(255, 255, 255, 0.4)'
             keyboardType='email-address'
             underlineColorAndroid='white'

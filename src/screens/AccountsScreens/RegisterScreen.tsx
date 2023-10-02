@@ -18,18 +18,18 @@ export const RegisterScreen = ({navigation}: Props) => {
     password: ''
   })
 
-//   useEffect(() => {
-//     if ( errorMessage.length === 0 ) return
-//     Alert.alert('Registro incorrecto', 
-//       errorMessage,
-//       [
-//         {
-//           text: 'OK',
-//           onPress: removeError
-//         }
-//       ]
-//     )
-//   }, [errorMessage])
+  useEffect(() => {
+    if ( errorMessage.length === 0 ) return
+    Alert.alert('Registro incorrecto', 
+      errorMessage,
+      [
+        {
+          text: 'OK',
+          onPress: removeError
+        }
+      ]
+    )
+  }, [errorMessage])
   
 
   const onRegister = () => {
@@ -38,9 +38,8 @@ export const RegisterScreen = ({navigation}: Props) => {
     signUp({
       email, 
       password,
-      name
+      username: name
     })
-
 
     Keyboard.dismiss()
   }
