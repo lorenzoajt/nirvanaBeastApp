@@ -29,31 +29,36 @@ export const AuthProvider = ({children}: any) => {
 
     useEffect(() => {
       checkToken()
+      // logOut()
     }, [])
   
-    const checkToken = async () => {
+    const checkToken = async () => {      
       const token = await AsyncStorage.getItem('token')
       
       // no token no authenticado
       if( !token ) return dispatch({ type: 'notAuthenticated'  })
   
       // hay token renovar o validar token
-      const res = await nirvanaBeastAPI.get('/api/auth')
-      
-      // check response status
-      if( res.status !== 200 ){
-        return dispatch({type: 'notAuthenticated' })
+      try {
+        const res = await nirvanaBeastAPI.get('/api/auth')
+         // save new token
+        await AsyncStorage.setItem('token', res.data.token)
+        // let users in
+        dispatch({
+          type: 'signUp',
+          payload: {
+            token: res.data.token,
+            user: res.data.usuario
+          }
+        })
+      } catch (error: any) {       
+        // remove token from async storage and return to login screen 
+        logOut()
       }
-      // save new token
-      await AsyncStorage.setItem('token', res.data.token)
-      // let users in
-      dispatch({
-        type: 'signUp',
-        payload: {
-          token: res.data.token,
-          user: res.data.usuario
-        }
-      })
+      
+      
+      
+     
         
     }
     
@@ -107,7 +112,6 @@ export const AuthProvider = ({children}: any) => {
     }
     // clean async storage
     const logOut = async () => {
-      console.log("logging out")
       await AsyncStorage.removeItem('token')
       dispatch({ type: 'logout' })    
   
