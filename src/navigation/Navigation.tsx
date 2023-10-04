@@ -9,11 +9,13 @@ import { LoginScreen } from '../screens/AccountsScreens/LoginScreen';
 import { RegisterScreen } from '../screens/AccountsScreens/RegisterScreen';
 import { AuthContext } from '../context/AuthContext';
 import { LoadingScreen } from '../screens/AccountsScreens/LoadingScreen';
+import { TabNavigator } from './TabNavigator';
 
 export type RootStackParams = {
   HomeScreen: undefined
   DetailScreen: Lesson
   InstructorScreen: Instructor
+  TabNavigator: undefined
 }
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -41,10 +43,8 @@ export const Navigation = () => {
           </>
         )
         : (
-          <>          
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="DetailScreen" component={DetailScreen} />     
-            <Stack.Screen name="InstructorScreen" component={InstructorDetailScreen} />      
+          <>    
+            <Stack.Screen name="TabNavigator" component={TabNavigator} />            
           </>
         )
       }
