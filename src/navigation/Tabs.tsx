@@ -8,7 +8,7 @@ import { InstructorDetailScreen } from '../screens/InstructorDetailScreen';
 import { Lesson } from '../interfaces/lessonInterface';
 import { Instructor } from '../interfaces/instructorsInterface';
 import { colors } from '../theme/appTheme';
-import { Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export type RootStackParams = {
@@ -53,26 +53,26 @@ export const Tabs = () => {
           let iconName: string = ''
 
           switch ( route.name ) {
-            case 'HomeScreen':
-              iconName = 'HS'
+            case 'HomeStackScreen':
+              iconName = 'home-outline'
               break;
             case 'PranaScreen':
-              iconName = 'PR'
+              iconName = 'ellipse-outline'
               break;
             case 'MyPracticeScreen':
-              iconName = 'MP'
+              iconName = 'add-circle-outline'
               break;
                       
           }
 
-          return <Text style={{color}}>{iconName}</Text>
+          return <Icon name={iconName} size={20} color={color}/>
         }
 
       })}
     >
-      <Tab.Screen name="HomeStackScreen" component={HomeStackScreen} />
-      <Tab.Screen name="PranaScreen" component={PranaScreen} />
-      <Tab.Screen name="MyPracticeScreen" component={MyPracticeScreen} />
+      <Tab.Screen name="HomeStackScreen" options={{title: 'Home'}} component={HomeStackScreen} />
+      <Tab.Screen name="PranaScreen" options={{title: 'Prana'}} component={PranaScreen} />
+      <Tab.Screen name="MyPracticeScreen" options={{title: 'My Practice'}} component={MyPracticeScreen} />
     </Tab.Navigator>
   );
 }
