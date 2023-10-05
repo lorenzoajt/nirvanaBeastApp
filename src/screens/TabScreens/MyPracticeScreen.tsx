@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { HorizontalSlider } from '../../components/HorizontalSlider'
 import { useLessons } from '../../hooks/useLessons'
 import { Card } from '../../components/MyPracticeComponents/Card';
+import { TimeCard } from '../../components/MyPracticeComponents/TimeCard'
 
 export const MyPracticeScreen = () => {
   const { logOut, user} = useContext(AuthContext)
@@ -27,7 +28,7 @@ export const MyPracticeScreen = () => {
 
           }}>
             <Card title='Clases Completadas' amount='3' icon='checkmark-outline' iconColor='#6DBE45'/>
-            <Card title='Tiempo' amount='7h 30min' icon='time-outline' iconColor='#6699CC'/>
+            <TimeCard title='Tiempo' time='11:59:30' icon='time-outline' iconColor='#6699CC'/>
           </View>       
           <View style={{
             display: 'flex',
@@ -36,8 +37,8 @@ export const MyPracticeScreen = () => {
             marginBottom: 10
 
           }}>
-            <Card title='Fitness' amount='3h 4min' icon='fitness-outline' iconColor='#FF6347'/>
-            <Card title='Mindfulness' amount='4h 5min' icon='flame-outline' iconColor='#A49ACB'/>
+            <TimeCard title='Fitness' time='5:29:30' icon='fitness-outline' iconColor='#FF6347'/>
+            <TimeCard title='Mindfulness' time='6:30:30' icon='flame-outline' iconColor='#A49ACB'/>
           </View>          
           
                   
