@@ -75,7 +75,7 @@ export const Tabs = () => {
       })}
     >
       <Tab.Screen name="HomeStackScreen" options={{title: 'Home'}} component={HomeStackScreen}  />
-      <Tab.Screen name="PranaScreen">
+      <Tab.Screen name="PranaScreen" options={{title: 'Prana'}}>
         {() => <PranaScreen isVideoPaused={isVideoPaused} setIsVideoPaused={setIsVideoPaused} />}
       </Tab.Screen>      
       <Tab.Screen name="MyPracticeScreen" options={{title: 'My Practice'}} component={MyPracticeScreen}/>
