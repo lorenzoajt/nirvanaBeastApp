@@ -1,41 +1,20 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, FlatList, Dimensions } from 'react-native';
-import Video from 'react-native-video';
-import pranas from '../../data/pranas';
+import { View, FlatList, Dimensions, Text } from 'react-native';
+import { PranaItem } from '../../components/PranaComponents/PranaItem';
 
 export const PranaScreen = () => {
 
-  const [paused, setPaused] = useState(false)
-  const onPlayPlayPausePress = () => {
-    setPaused(!paused)
+  const breathePrana = {
+    id: '1',
+    videoUri: 'https://res.cloudinary.com/doiyktiuw/video/upload/v1696525925/Nirvana/f2igaepguucd152jdrlp.mp4'  
+  }
+  const naturePrana = {
+    id: '1',
+    videoUri: 'https://res.cloudinary.com/doiyktiuw/video/upload/v1696529243/Nirvana/fm5jtymanbr3wneogfln.mp4'  
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={onPlayPlayPausePress}>
-        <Video
-          source={{ uri: 'https://res.cloudinary.com/doiyktiuw/video/upload/v1696525925/Nirvana/f2igaepguucd152jdrlp.mp4' }}
-          style={styles.video}
-          resizeMode="cover"
-          paused={paused}
-          repeat        
-          onError={(error)=> console.log(error)}
-        />
-        
-      </TouchableWithoutFeedback>
+    <View style={{flex: 1}}>
+      <PranaItem prana={breathePrana}/>    
     </View>
   )
 }
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  video: {
-    flex: 1,
-  },
-});
-
