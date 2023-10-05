@@ -5,23 +5,20 @@ import { Prana } from '../../interfaces/pranaInterfaces';
 
 interface Props {
   prana: Prana    
+  isVideoPaused?: boolean
+  setIsVideoPaused: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const PranaItem = ({prana}: Props ) => {
-  
-  const [paused, setPaused] = useState(false)
-  const onPlayPlayPausePress = () => {
-    setPaused(!paused)
-  }
+export const PranaItem = ({prana, isVideoPaused, setIsVideoPaused}: Props ) => {
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={onPlayPlayPausePress}>
-        <Video
+      <TouchableWithoutFeedback onPress={() => setIsVideoPaused(!isVideoPaused)}>
+        <Video          
           source={{ uri: prana.videoUri }}
           style={styles.video}
           resizeMode="cover"
-          paused={paused}
+          paused={isVideoPaused}
           repeat        
           onError={(error)=> console.log(error)}
         />

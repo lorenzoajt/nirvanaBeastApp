@@ -1,7 +1,22 @@
-import { View, FlatList, Dimensions, Text } from 'react-native';
+import { View } from 'react-native';
 import { PranaItem } from '../../components/PranaComponents/PranaItem';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 
-export const PranaScreen = () => {
+interface Props {
+  isVideoPaused: boolean
+  setIsVideoPaused: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const PranaScreen = ({ isVideoPaused, setIsVideoPaused }:Props) => {
+  // Cuando la pantalla obtiene el enfoque
+  useFocusEffect(
+    useCallback(() => {    
+      setIsVideoPaused(false)
+
+      return () => setIsVideoPaused(true);
+    }, [])
+  );
 
   const breathePrana = {
     id: '1',
@@ -14,7 +29,7 @@ export const PranaScreen = () => {
 
   return (
     <View style={{flex: 1}}>
-      <PranaItem prana={breathePrana}/>    
+        <PranaItem prana={breathePrana} isVideoPaused={isVideoPaused} setIsVideoPaused={setIsVideoPaused}/>    
     </View>
   )
 }

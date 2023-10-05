@@ -9,13 +9,14 @@ import { Lesson } from '../interfaces/lessonInterface';
 import { Instructor } from '../interfaces/instructorsInterface';
 import { colors } from '../theme/appTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useState } from 'react';
 
 
 export type RootStackParams = {
   HomeScreen: undefined
   DetailScreen: Lesson
   InstructorScreen: Instructor
-  TabNavigator: undefined
+  TabNavigator: undefined,
 }
 
 const HomeStack = createStackNavigator<RootStackParams>();
@@ -33,6 +34,9 @@ const HomeStackScreen = () => {
 const Tab = createBottomTabNavigator();
 
 export const Tabs = () => {
+  
+  const [isVideoPaused, setIsVideoPaused] = useState(false);
+  
   return (
     <Tab.Navigator       
       sceneContainerStyle={{
@@ -40,11 +44,11 @@ export const Tabs = () => {
       }}  
       screenOptions={ ({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: colors.primary,
+        tabBarActiveTintColor: colors.primary,        
         tabBarStyle: {
           borderTopColor: colors.primary,
           borderTopWidth: 0,
-          elevation: 0
+          elevation: 0               
         },
         tabBarLabelStyle: {
           fontSize: 15
@@ -70,9 +74,11 @@ export const Tabs = () => {
 
       })}
     >
-      <Tab.Screen name="HomeStackScreen" options={{title: 'Home'}} component={HomeStackScreen} />
-      <Tab.Screen name="PranaScreen" options={{title: 'Prana'}} component={PranaScreen} />
-      <Tab.Screen name="MyPracticeScreen" options={{title: 'My Practice'}} component={MyPracticeScreen} />
+      <Tab.Screen name="HomeStackScreen" options={{title: 'Home'}} component={HomeStackScreen}  />
+      <Tab.Screen name="PranaScreen">
+        {() => <PranaScreen isVideoPaused={isVideoPaused} setIsVideoPaused={setIsVideoPaused} />}
+      </Tab.Screen>      
+      <Tab.Screen name="MyPracticeScreen" options={{title: 'My Practice'}} component={MyPracticeScreen}/>
     </Tab.Navigator>
   );
 }
