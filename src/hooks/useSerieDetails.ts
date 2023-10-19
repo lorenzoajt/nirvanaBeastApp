@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Serie } from '../interfaces/serieInterface';
-import { Lesson } from '../interfaces/lessonInterface';
+import { Lesson, LessonFull } from '../interfaces/lessonInterface';
 import nirvanaBeastAPI from '../api/nirvanaBeastAPI';
 
 interface SerieDetails {
     isLoading: boolean
     serieFull?: Serie
-    lessons: Lesson[]
+    lessons: LessonFull[]
 }
 
 
@@ -25,7 +25,7 @@ export const useSerieDetails = (serieId: number) => {
         const [serieDetailsResponse, lessonsResponse ] = await Promise.all([serieDetailsPromise, lessonsPromise])        
 
         setState({
-            isLoading: true,
+            isLoading: false,
             serieFull: serieDetailsResponse.data,
             lessons: lessonsResponse.data
         })

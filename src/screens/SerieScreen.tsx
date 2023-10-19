@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WebView } from 'react-native-webview';
 import { useSerieDetails } from '../hooks/useSerieDetails';
+import { SerieDetails } from '../components/SeriesComponents/SerieDetails';
 
 const screenHeight = Dimensions.get('screen').height
 interface Props extends StackScreenProps<RootStackParams, 'SerieScreen'> {}
@@ -35,11 +36,11 @@ export const SerieScreen = ( { route, navigation }: Props ) => {
       </View>
 
       
-      {/* {
+      {
         isLoading 
           ? <ActivityIndicator size={ 30 } color='gray' style={{marginTop: 20}}/>  
-          : <LessonDetails lessonFull={lessonFull!} instructor={instructors}/>          
-      } */}      
+          : <SerieDetails serieFull={serieFull!} lessons={lessons}/>          
+      } 
       <View style={styles.backButton}>
         <TouchableOpacity
           onPress={() => navigation.pop()}

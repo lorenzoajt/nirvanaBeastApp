@@ -11,5 +11,5 @@ export interface Serie {
     difficulty: number;
     instructor: number[];
     discipline: number[];
-    skill:      number[];
+    skill:      string[];
 }
