@@ -10,11 +10,14 @@ import { Instructor } from '../interfaces/instructorsInterface';
 import { colors } from '../theme/appTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useState } from 'react';
+import { SerieScreen } from '../screens/SerieScreen';
+import { Serie } from '../interfaces/serieInterface';
 
 
 export type RootStackParams = {
   HomeScreen: undefined
   DetailScreen: Lesson
+  SerieScreen: Serie
   InstructorScreen: Instructor
   TabNavigator: undefined,
 }
@@ -26,6 +29,7 @@ const HomeStackScreen = () => {
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="DetailScreen" component={DetailScreen} />
+      <HomeStack.Screen name="SerieScreen" component={SerieScreen} />
       <HomeStack.Screen name="InstructorScreen" component={InstructorDetailScreen} />      
     </HomeStack.Navigator>
   );

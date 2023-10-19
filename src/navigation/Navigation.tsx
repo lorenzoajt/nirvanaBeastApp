@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen } from '../screens/HomeScreen';
-import { DetailScreen } from '../screens/DetailScreen';
 import { Lesson } from '../interfaces/lessonInterface';
 import { Instructor } from '../interfaces/instructorsInterface';
 import { InstructorDetailScreen } from '../screens/InstructorDetailScreen';
@@ -10,12 +8,14 @@ import { RegisterScreen } from '../screens/AccountsScreens/RegisterScreen';
 import { AuthContext } from '../context/AuthContext';
 import { LoadingScreen } from '../screens/AccountsScreens/LoadingScreen';
 import { Tabs } from './Tabs';
+import { Serie } from '../interfaces/serieInterface';
 
 export type RootStackParams = {
   HomeScreen: undefined
   DetailScreen: Lesson
   InstructorScreen: Instructor
   Tabs: undefined
+  SerieScreen: Serie
 }
 
 const Stack = createStackNavigator<RootStackParams>();

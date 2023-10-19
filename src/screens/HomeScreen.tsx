@@ -7,14 +7,15 @@ import { HorizontalSlider } from '../components/HorizontalSlider';
 import { useLessons } from '../hooks/useLessons';
 import { LessonBanner } from '../components/LessonBanner';
 import { InstructorSlider } from '../components/InstructorSlider';
+import { SeriesSlider } from '../components/SeriesComponents/SeriesSlider';
+import { StylesSlider } from '../components/StyleComponents/StylesSlider';
 
 
 const { width: windowWidth } =Dimensions.get('window')
 
 export const HomeScreen = () => {
-  const {isLoading, newLessons, instructors} = useLessons()
+  const {isLoading, newLessons, instructors, series, styles} = useLessons()    
   const { top }= useSafeAreaInsets()
-  
 
   if(isLoading){
     return(
@@ -47,8 +48,10 @@ export const HomeScreen = () => {
 
           {/* Secciones */}
           <InstructorSlider instructors={instructors} title='Instructores'/>
-          <HorizontalSlider lessons={newLessons} title='Para ti'/>
-          <HorizontalSlider lessons={newLessons} title='Próximamente'/>
+          <StylesSlider styles={styles} title='Estilos'/>
+          <HorizontalSlider lessons={newLessons} title='Nuevas Clases'/>
+          {/* <HorizontalSlider lessons={newLessons} title='Estilos'/> */}      
+          <SeriesSlider series={series} title='Series'/>
           
       </View>
     </ScrollView>
